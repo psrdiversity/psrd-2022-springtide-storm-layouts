@@ -59,3 +59,354 @@ html, body {
 .hidden.hidden.hidden {
 	display: none;
 }
+
+body {
+	background-color: #f0f;
+	overflow: hidden;
+}
+
+.container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+
+.runner-block {
+	display: flex;
+	flex-direction: column;
+}
+
+.block-letters {
+	position: relative;
+	color: #000;
+	/* text-shadow: -1px 1px 0px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; */
+	font-family: "Fighting Ideals Outline";
+}
+
+.block-inside {
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #fff;
+	/* text-shadow: -1px 1px 0px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; */
+	font-family: "Fighting Ideals";
+}
+
+.block-letters.level {
+	text-transform: uppercase;
+	color: #403C0C;
+}
+
+.block-letters.level .block-inside {
+	color: #FFD467;
+}
+
+.runner-name {
+	position: relative;
+	font-size: 2.5rem;
+	max-width: max-content;
+}
+
+.runner-bar-top-container {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	justify-content: flex-end;
+	align-items: flex-end;
+	height: 40px;
+}
+
+.runner-bar-top {
+	position: relative;
+	left: 2px;
+	stroke: #666666;
+	stroke-width: 2px;
+	stroke-linecap: butt;
+	fill: #F8F8F8;
+	height: 100%;
+}
+
+.runner-bar-top-text {
+	position: absolute;
+	display: flex;
+	padding-left: 58px;
+	left: 0;
+	top: 12px;
+	width: 100%;
+	padding-right: 14px;
+	font-size: 1rem;
+	align-items: baseline;
+	font-family: "Truth and Ideals";
+}
+
+.runner-info {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-between;
+	top: 10px;
+	padding-right: 14px;
+	padding-left: 78px;
+}
+
+.runner-pronouns-container {
+	display: flex;
+	align-items: baseline;
+}
+
+.runner-pronouns-label {
+	margin-left: 1rem;
+	margin-right: 0.25rem;
+}
+
+.runner-pronouns {
+	font-size: 1.25rem;
+	max-width: max-content;
+}
+
+.runner-bar-bottom-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.runner-bar-bottom {
+	position: relative;
+	left: 30px;
+	top: -10px;
+	width: 100%;
+	height: 40px;
+	background-color: #313131;
+	border: 4px solid #1D1D1B;
+	transform: skew(-45deg);
+}
+
+.runner-bar-bottom-text {
+	position: relative;
+	display: flex;
+	top: 5px;
+	padding-left: 47.5px;
+	padding-right: 38px;
+	height: calc(100% - 5px);
+	justify-content: space-between;
+	align-items: center;
+	transform: skew(45deg);
+	color: #fff;
+	font-family: "Fighting Ideals";
+	font-size: 1.5rem;
+}
+
+.runner-runtime {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+}
+
+.clock-icon {
+	position: relative;
+	top: 1px;
+	width: 18px;
+	height: 18px;
+	border-radius: 4px;
+	background-color: #fff;
+	margin-right: 0.5rem;
+}
+
+.clock-icon-inner {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	width: 14px;
+	height: 14px;
+	border-radius: 4px;
+	background-color: #313131;
+}
+
+.clock-icon-hand {
+	position: absolute;
+	left: 8px;
+	top: 2px;
+	width: 3px;
+	height: 6px;
+	background-color: #fff;
+	transform: rotate(40deg);
+}
+
+.runner-game {
+	font-size: 1.125rem;
+}
+
+.runner-console {
+	font-size: 0.825rem;
+	margin-left: auto;
+}
+
+.runner-category {
+	font-family: "Truth and Ideals";
+	font-size: 1rem;
+}
+
+.info-bar {
+	position: relative;
+	display: flex;
+	background-color: #181818;
+	width: 100vw;
+	padding: 0.25rem 0.5rem;
+	color: #fff;
+	justify-content: space-between;
+	font-family: "Small Truths";
+	text-transform: uppercase;
+}
+
+.info-bar-flair {
+	position: absolute; 
+	display: flex;
+	top: 50%;
+	left: 50%;
+	align-items: center;
+	transform: translate(-50%, -50%);
+}
+
+.info-bar-flair-box {
+	width: 4px;
+	height: 4px;
+	margin-right: 0.25rem;
+	background-color: #4C4C4C;
+	margin-top: -2px;
+}
+
+.info-bar-flair-text {
+	color: #4C4C4C;
+}
+
+.info-bar-flair-text + .info-bar-flair-box {
+	margin-left: 2rem;
+}
+
+.info-bar-flair-box.enabled {
+	background-color: #fff;
+}
+
+.info-bar-flair-text.enabled {
+	color: #fff;
+}
+
+.bottom-content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.donation-block {
+	align-self: flex-start;
+}
+
+.donation-block .runner-bar-top-text {
+	top: 13px;
+}
+
+.donation-block .runner-bar-top-text {
+	align-items: center;
+}
+
+.runner-block.flipped .runner-bar-top-container, 
+.runner-block.flipped .runner-bar-bottom-container {
+	transform: scaleX(-100%);
+}
+
+.runner-block.flipped .runner-info {
+	left: 0;
+	padding-right: 78px;
+	padding-left: 14px;
+}
+
+.runner-block.flipped .runner-bar-top-text {
+	transform: scaleX(-100%);
+	left: 0;
+	padding-left: 14px;
+	padding-right: 58px;
+}
+
+.runner-block.flipped .runner-bar-bottom-text {
+	transform: scaleX(-100%) skew(-45deg);
+	padding-left: 38px;
+	padding-right: 28px;
+}
+
+.donation-block .runner-name {
+	font-size: 1.5rem;
+}
+
+.donate-cta {
+	font-size: 1rem;
+	font-family: "Truth and Ideals";
+}
+
+.donation-progress-bar {
+	position: relative;
+	top: 1px;
+	width: 300px;
+	min-width: 300px;
+	height: 12px;
+	border: 2px solid #353535; 
+	border-radius: 4px;
+	overflow: hidden;
+	margin-right: 0.5rem;
+}
+
+.donation-progress-bar-fill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 8px;
+	z-index: -1;
+}
+
+.donation-progress-bar-fill.red {
+	background: linear-gradient(180deg, #803A44 0%, #803A44 20%, #B45865 20%, #B45865 80%, #803A44 80%, #803A44 100%);
+}
+
+.donation-progress-bar-fill.yellow {
+	background: linear-gradient(180deg, #AC9744 0%, #AC9744 20%, #E1DF5F 20%, #E1DF5F 80%, #AC9744 80%, #AC9744 100%);
+}
+
+.donation-progress-bar-fill.green {
+	background: linear-gradient(180deg, rgba(18,157,56,1) 0%, rgba(18,157,56,1) 20%, rgba(36,195,79,1) 20%, rgba(44,212,90,1) 80%, rgba(18,157,56,1) 80%, rgba(18,157,56,1) 100%);
+}
+
+.donation-goal-container {
+	display: flex;
+	align-items: baseline;
+}
+
+.donation-goal-label {
+	margin-left: 1rem;
+	margin-right: 0.25rem;
+}
+
+.donation-total {
+	font-variant-numeric: tabular-nums;
+}
+
+.runner-block-container {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.runner-block.solo {
+	margin-left: auto;
+}
+
+.runner-block.no-game-info .runner-bar-top-text,
+.runner-block.no-game-info .runner-bar-bottom-text {
+	display: none;
+}
+
+.runner-block.no-game-info .runner-bar-bottom {
+	top: -30px;
+}
