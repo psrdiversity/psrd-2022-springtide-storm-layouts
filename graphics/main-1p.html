@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    <link href="css/common.css" rel="stylesheet"/>
+
+		<!-- CSS -->
+		<style type="text/css">
+      body {
+        background-color: #f0f;
+        overflow: hidden;
+      }
+
+      .container {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+      
+      .runner-block {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .block-letters {
+        position: relative;
+        color: #000;
+        /* text-shadow: -1px 1px 0px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; */
+        font-family: "Fighting Ideals Outline";
+      }
+
+      .block-inside {
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #fff;
+        /* text-shadow: -1px 1px 0px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; */
+        font-family: "Fighting Ideals";
+      }
+
+      .runner-name {
+        position: relative;
+        font-size: 2.5rem;
+        max-width: max-content;
+      }
+
+      .runner-bar-top-container {
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: 40px;
+      }
+      
+      .runner-bar-top {
+        position: relative;
+        left: 2px;
+        stroke: #666666;
+        stroke-width: 2px;
+        stroke-linecap: butt;
+        fill: url(#runner-bar-gradient);
+        height: 100%;
+      }
+
+      .runner-bar-top-text {
+        position: absolute;
+        display: flex;
+        left: 78px;
+        top: 10px;
+        width: 100%;
+        padding-right: 94px;
+        font-size: 1.5rem;
+        align-items: center;
+      }
+
+      .runner-info {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        left: 80px;
+        top: 10px;
+      }
+
+      .runner-pronouns {
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        max-width: max-content;
+      }
+
+      .runner-bar-bottom-container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .runner-bar-bottom {
+        position: relative;
+        left: 30px;
+        top: -10px;
+        width: 100%;
+        height: 40px;
+        background-color: #313131;
+        border: 4px solid #1D1D1B;
+        transform: skew(-45deg);
+      }
+
+      .runner-bar-bottom-text {
+        position: relative;
+        display: flex;
+        top: 5px;
+        padding-left: 45px;
+        height: calc(100% - 5px);
+        align-items: center;
+        transform: skew(45deg);
+        color: #fff;
+        font-family: "Fighting Ideals";
+        font-size: 1.5rem;
+      }
+
+      .runner-runtime {
+        display: flex;
+        margin-left: auto;
+        margin-right: 40px;
+        align-items: center;
+      }
+
+      .clock-icon {
+        position: relative;
+        top: 1px;
+        width: 22px;
+        height: 22px;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-right: 0.5rem;
+      }
+
+      .clock-icon-inner {
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        background-color: #313131;
+      }
+
+      .clock-icon-hand {
+        position: absolute;
+        left: 10px;
+        top: 3px;
+        width: 3px;
+        height: 7px;
+        background-color: #fff;
+        transform: rotate(40deg);
+      }
+
+      .runner-console {
+        font-size: 1rem;
+        margin-left: auto;
+      }
+      
+      .donation-bar {
+        position: relative;
+        display: flex;
+        background-color: #181818;
+        width: 100vw;
+        padding: 0.25rem 0.5rem;
+        color: #fff;
+        justify-content: space-between;
+        font-family: "Small Truths";
+        text-transform: uppercase;
+      }
+
+      .donation-bar-flair {
+        position: absolute; 
+        display: flex;
+        top: 50%;
+        left: 50%;
+        align-items: center;
+        transform: translate(-50%, -50%);
+      }
+
+      .donation-bar-flair-box {
+        width: 4px;
+        height: 4px;
+        margin-right: 0.25rem;
+        background-color: #4C4C4C;
+      }
+
+      .donation-bar-flair-text {
+        color: #4C4C4C;
+      }
+
+      .donation-bar-flair-text + .donation-bar-flair-box {
+        margin-left: 2rem;
+      }
+
+      .donation-bar-flair-box.enabled {
+        background-color: #fff;
+      }
+
+      .donation-bar-flair-text.enabled {
+        color: #fff;
+      }
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+      <div class="runner-block">
+        <div class="runner-info">
+          <div class="block-letters runner-name">
+            <div class="block-inside">Swiftalu</div>
+            Swiftalu
+          </div>
+          <div class="block-letters runner-pronouns">
+            <div class="block-inside">she/her</div>
+            she/her
+          </div>
+        </div>
+        <div class="runner-bar-top-container">
+          <svg class="runner-bar-top" width="100%" viewBox="0 0 535.1829833984375 37" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+            <defs>
+              <linearGradient id="runner-bar-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="#F8F8F8" />
+                <stop offset="85%" stop-color="#F8F8F8" />
+                <stop offset="80%" stop-color="#DBDBDB" />
+                <stop offset="100%" stop-color="#DBDBDB" />
+              </linearGradient>
+            </defs>
+            <path d="M535.433 36H.25L33.158.25l7.816 9.461h494.459v22.551"/>
+          </svg>
+          <div class="runner-bar-top-text">
+            <div class="runner-game">Pokemon White 2</div>
+            <div class="runner-console">
+              Nintendo DS - 2012
+            </div>
+          </div>
+        </div>
+        <div class="runner-bar-bottom-container">
+          <div class="runner-bar-bottom">
+            <div class="runner-bar-bottom-text">
+              <div class="runner-category">Any%</div>
+              <div class="runner-runtime">
+                <div class="clock-icon">
+                  <div class="clock-icon-inner">
+                    <div class="clock-icon-hand"></div>
+                  </div>
+                </div>
+                4:20:00
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="donation-bar">
+        PSRD Springtide Storm 2022
+        <div class="donation-bar-flair">
+          <div class="donation-bar-flair-box enabled"></div>
+          <span class="donation-bar-flair-text enabled">IN PERSON</span>
+          <div class="donation-bar-flair-box enabled"></div>
+          <span class="donation-bar-flair-text enabled">ONLINE</span>
+          <div class="donation-bar-flair-box"></div>
+          <span class="donation-bar-flair-text">WIRELESS</span>
+        </div>
+        <div class="up-next-container">
+          Up next:
+          <span class="up-next-container">Pokemon Alpha Saphhire Any% by Corvimae</span>
+        </div>
+      </div>
+    </div>
+		<!-- JavaScript -->
+		<script src="js/run-info.js"></script>
+	</body>
+</html>
