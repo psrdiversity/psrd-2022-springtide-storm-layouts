@@ -1,3 +1,3 @@
-# psrd-2021-snow-warning-layouts
+# psrd-2022-springtide-storm-layouts
 
-Based on speedcontrol-simpletext.
+rated n for n
