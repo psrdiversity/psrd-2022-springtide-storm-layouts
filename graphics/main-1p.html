@@ -18,7 +18,7 @@
         overflow: hidden;
         flex-direction: column;
         align-items: flex-end;
-        justify-content: flex-end;
+        justify-content: space-between;
       }
       
       .runner-block {
@@ -40,6 +40,15 @@
         color: #fff;
         /* text-shadow: -1px 1px 0px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000; */
         font-family: "Fighting Ideals";
+      }
+
+      .block-letters.level {
+        text-transform: uppercase;
+        color: #403C0C;
+      }
+
+      .block-letters.level .block-inside {
+        color: #FFD467;
       }
 
       .runner-name {
@@ -87,9 +96,13 @@
         top: 10px;
       }
 
+      .runner-pronouns-label {
+        margin-left: 1rem;
+        margin-right: 0.25rem;
+      }
+
       .runner-pronouns {
         font-size: 1.25rem;
-        margin-left: 1rem;
         max-width: max-content;
       }
 
@@ -113,7 +126,7 @@
         position: relative;
         display: flex;
         top: 5px;
-        padding-left: 45px;
+        padding-left: 47.5px;
         height: calc(100% - 5px);
         align-items: center;
         transform: skew(45deg);
@@ -164,7 +177,7 @@
         margin-left: auto;
       }
       
-      .donation-bar {
+      .info-bar {
         position: relative;
         display: flex;
         background-color: #181818;
@@ -176,7 +189,7 @@
         text-transform: uppercase;
       }
 
-      .donation-bar-flair {
+      .info-bar-flair {
         position: absolute; 
         display: flex;
         top: 50%;
@@ -185,42 +198,110 @@
         transform: translate(-50%, -50%);
       }
 
-      .donation-bar-flair-box {
+      .info-bar-flair-box {
         width: 4px;
         height: 4px;
         margin-right: 0.25rem;
         background-color: #4C4C4C;
       }
 
-      .donation-bar-flair-text {
+      .info-bar-flair-text {
         color: #4C4C4C;
       }
 
-      .donation-bar-flair-text + .donation-bar-flair-box {
+      .info-bar-flair-text + .info-bar-flair-box {
         margin-left: 2rem;
       }
 
-      .donation-bar-flair-box.enabled {
+      .info-bar-flair-box.enabled {
         background-color: #fff;
       }
 
-      .donation-bar-flair-text.enabled {
+      .info-bar-flair-text.enabled {
         color: #fff;
       }
 
+      .bottom-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .donation-block {
+        align-self: flex-start;
+      }
+
+      .donation-block .runner-bar-top-container, 
+      .donation-block .runner-bar-bottom-container {
+        transform: scaleX(-100%);
+      }
+
+      .donation-block .runner-info {
+        left: 24px;
+      }
+      .donation-block .runner-bar-top-text {
+        transform: scaleX(-100%);
+        padding-left: 101px;
+        padding-right: 0;
+      }
+
+      .donation-block .runner-bar-bottom-text {
+        transform: scaleX(-100%) skew(-45deg);
+      }
+
+      .donation-block .runner-name {
+        font-size: 1.5rem;
+      }
+
+      .donate-cta {
+        font-size: 1rem;
+      }
+
+      .donation-progress-bar {
+        position: relative;
+        width: 400px;
+        height: 12px;
+        border: 2px solid #353535; 
+        border-radius: 4px;
+        overflow: hidden;
+        margin-left: 0.5rem;
+      }
+
+      .donation-progress-bar-fill {
+        position: absolute;
+        left: -4px;
+        top: 0;
+        height: 8px;
+        z-index: -1;
+        border-radius: 3px;
+      }
+
+      .donation-progress-bar-fill.green {
+        background: linear-gradient(180deg, rgba(18,157,56,1) 0%, rgba(36,195,79,1) 10%, rgba(44,212,90,1) 90%, rgba(18,157,56,1) 100%);
+      }
+
+      .donation-goal-label {
+        margin-left: 1rem;
+        margin-right: 0.25rem;
+      }
 		</style>
 	</head>
 	<body>
 		<div class="container">
-      <div class="runner-block">
+      <div class="donation-block">
         <div class="runner-info">
           <div class="block-letters runner-name">
-            <div class="block-inside">Swiftalu</div>
-            Swiftalu
+            <div class="block-inside">Benefitting Some Charity Idk</div>
+            Benefitting Some Charity Idk
           </div>
-          <div class="block-letters runner-pronouns">
-            <div class="block-inside">she/her</div>
-            she/her
+          
+          <div class="block-letters donation-goal-label level">
+            <div class="block-inside">Goal.</div>
+            Goal.
+          </div>
+          <div class="block-letters donation-goal">
+            <div class="block-inside">$5000</div>
+            $5000
           </div>
         </div>
         <div class="runner-bar-top-container">
@@ -236,41 +317,86 @@
             <path d="M535.433 36H.25L33.158.25l7.816 9.461h494.459v22.551"/>
           </svg>
           <div class="runner-bar-top-text">
-            <div class="runner-game">Pokemon White 2</div>
-            <div class="runner-console">
-              Nintendo DS - 2012
+            <div class="donation-total">$1000</div>
+            <div class="donation-progress-bar">
+              <div class="donation-progress-bar-fill green" style="width: 80%"></div>
             </div>
           </div>
         </div>
         <div class="runner-bar-bottom-container">
           <div class="runner-bar-bottom">
-            <div class="runner-bar-bottom-text">
-              <div class="runner-category">Any%</div>
-              <div class="runner-runtime">
-                <div class="clock-icon">
-                  <div class="clock-icon-inner">
-                    <div class="clock-icon-hand"></div>
-                  </div>
-                </div>
-                4:20:00
-              </div>
+            <div class="runner-bar-bottom-text donate-cta">
+              Donate at psrdiversity.com/donate!
             </div>
           </div>
         </div>
       </div>
-      <div class="donation-bar">
-        PSRD Springtide Storm 2022
-        <div class="donation-bar-flair">
-          <div class="donation-bar-flair-box enabled"></div>
-          <span class="donation-bar-flair-text enabled">IN PERSON</span>
-          <div class="donation-bar-flair-box enabled"></div>
-          <span class="donation-bar-flair-text enabled">ONLINE</span>
-          <div class="donation-bar-flair-box"></div>
-          <span class="donation-bar-flair-text">WIRELESS</span>
+      <div class="bottom-content">
+        <div class="runner-block">
+          <div class="runner-info">
+            <div class="block-letters runner-name">
+              <div class="block-inside">Swiftalu</div>
+              Swiftalu
+            </div>
+
+            <div class="block-letters runner-pronouns-label level">
+              <div class="block-inside">AKA.</div>
+              AKA.
+            </div>
+            <div class="block-letters runner-pronouns">
+              <div class="block-inside">she/her</div>
+              she/her
+            </div>
+          </div>
+          <div class="runner-bar-top-container">
+            <svg class="runner-bar-top" width="100%" viewBox="0 0 535.1829833984375 37" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5">
+              <defs>
+                <linearGradient id="runner-bar-gradient" x1="0.5" y1="0" x2="0.5" y2="1">
+                  <stop offset="0%" stop-color="#F8F8F8" />
+                  <stop offset="85%" stop-color="#F8F8F8" />
+                  <stop offset="80%" stop-color="#DBDBDB" />
+                  <stop offset="100%" stop-color="#DBDBDB" />
+                </linearGradient>
+              </defs>
+              <path d="M535.433 36H.25L33.158.25l7.816 9.461h494.459v22.551"/>
+            </svg>
+            <div class="runner-bar-top-text">
+              <div class="runner-game">Pokemon White 2</div>
+              <div class="runner-console">
+                Nintendo DS - 2012
+              </div>
+            </div>
+          </div>
+          <div class="runner-bar-bottom-container">
+            <div class="runner-bar-bottom">
+              <div class="runner-bar-bottom-text">
+                <div class="runner-category">Any%</div>
+                <div class="runner-runtime">
+                  <div class="clock-icon">
+                    <div class="clock-icon-inner">
+                      <div class="clock-icon-hand"></div>
+                    </div>
+                  </div>
+                  4:20:00
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="up-next-container">
-          Up next:
-          <span class="up-next-container">Pokemon Alpha Saphhire Any% by Corvimae</span>
+        <div class="info-bar">
+          PSRD Springtide Storm 2022
+          <div class="info-bar-flair">
+            <div class="info-bar-flair-box enabled"></div>
+            <span class="info-bar-flair-text enabled">IN PERSON</span>
+            <div class="info-bar-flair-box enabled"></div>
+            <span class="info-bar-flair-text enabled">ONLINE</span>
+            <div class="info-bar-flair-box"></div>
+            <span class="info-bar-flair-text">WIRELESS</span>
+          </div>
+          <div class="up-next-container">
+            Up next:
+            <span class="up-next-container">Pokemon Alpha Saphhire Any% by Corvimae</span>
+          </div>
         </div>
       </div>
     </div>
