@@ -8,11 +8,13 @@
 	// Other bundle names that could be supplied here: speedcontrol-srcomtracker
 	const trackerBundle = 'speedcontrol-gdqtracker'
 	
-	const donationTotalElem = document.querySelector('#donationTotal');
+	const donationTotalElem = document.querySelector('#donation-total');
+	const progressBarFillElem = document.querySelector('#donation-progress-bar-fill');
 	
 	// This is where the donation total is received.
 	// The "change" event is triggered when the donation total changes.
 	const donationTotal = nodecg.Replicant('donationTotal', trackerBundle);
+	const donationTarget = nodecg.Replicant('donationTarget', trackerBundle);
 
 	const animationIntervalId = { current: null };
 
@@ -24,14 +26,41 @@
 			// Math.floor(newVal) removes the cents/pence.
 			// "toLocaleString" adds commas to the donation total to separate 1000s.
 			
-			const value = Math.floor(newVal + 560).toLocaleString('en-US', { minimumFractionDigits: 0 });
+			const value = Math.floor(newVal).toLocaleString('en-US', { minimumFractionDigits: 0 });
 			//var value = newVal.toLocaleString('en-US', {minimumFractionDigits: 0});
 
 			donationTotalElem.innerHTML = `$${value}`;
+
 			if (animationIntervalId.current) clearInterval(animationIntervalId.current);
 		} else {
-			animateTotal(Number(newVal) + 560);
+			animateTotal(Number(newVal));
 		}
+	});
+
+	donationTarget.on('change', newVal => {
+		const value = newVal.toLocaleString('en-US', { minimumFractionDigits: 0 });
+
+		document.querySelector('#donation-goal').innerHTML = `$${value}`;
+		document.querySelector('#donation-goal-shading').innerHTML = `$${value}`;
+	});
+
+	function updateProgressBar(value) {
+		const percentage = Math.min(value / donationTarget.value, 1);
+
+		progressBarFillElem.style.width = `${percentage * 100}%`;
+		progressBarFillElem.classList.remove('red', 'yellow', 'green');
+
+		if (percentage < 0.33) {
+			progressBarFillElem.classList.add('red');
+		} else if (percentage < 0.66) {
+			progressBarFillElem.classList.add('yellow');
+		} else {
+			progressBarFillElem.classList.add('green');
+		}
+	}
+	
+	NodeCG.waitForReplicants(donationTotal, donationTarget).then(() => {
+		updateProgressBar(donationTotal.value);
 	});
 	
 	function animateTotal(value) {
@@ -39,20 +68,21 @@
 
 		const currentValue = Number(donationTotalElem.innerHTML.replace('$', '').replace(',', ''));
 
-		console.log('av', donationTotalElem.innerHTML, currentValue);
-		const timeBeforeIncrement = Math.max(ANIMATE_TIME_MS / (value - currentValue), 1);
+		const difference = value - currentValue;
+		const timeBeforeIncrement = Math.max(difference <= ANIMATE_TIME_MS ? Math.floor(ANIMATE_TIME_MS / difference) : 1, 10);
+		const incrementAmount = timeBeforeIncrement === 10 ? Math.ceil(difference / ANIMATE_TIME_MS) * 10 : 1;
 
 		animationIntervalId.current = setInterval(() => {
-			console.log(donationTotalElem.innerHTML);
-			const nextValue = Number(donationTotalElem.innerHTML.replace('$', '').replace(',', '')) + 1;
-			console.log('nv', nextValue);
-			donationTotalElem.innerHTML = `$${nextValue}`;
+			const nextValue = Math.min(value, Number(donationTotalElem.innerHTML.replace('$', '').replace(',', '')) + incrementAmount);
+
+			donationTotalElem.innerHTML = `$${nextValue.toLocaleString('en-US', { minimumFractionDigits: 0 })}`;
+			updateProgressBar(nextValue);
 			if (nextValue >= value) clearInterval(animationIntervalId.current);
 		}, timeBeforeIncrement);
 	}
 	
-	setTimeout(() => animateTotal(1000), 1000);
-	// setTimeout(() => animateTotal(1500), 5000);
-	// setTimeout(() => animateTotal(1500), 8000);
+	// setTimeout(() => animateTotal(20000), 3000);
+	// setTimeout(() => animateTotal(22000), 5000);
+	// setTimeout(() => animateTotal(22005), 8000);
 })();
 
