@@ -11,13 +11,40 @@
 	const runnerRightInfo = document.querySelector('#runner-right');
 	const hostInfo = document.querySelectorAll('.host-info');
 	const commentaryInfo = document.querySelectorAll('.commentary-info');
+	const nextRunElem = document.querySelector('.up-next-text');
 	
 	// This is where the information is received for the run we want to display.
 	// The "change" event is triggered when the current run is changed.
+	const runDataArray = nodecg.Replicant('runDataArray', speedcontrolBundle);
 	const runDataActiveRun = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
+	const runDataActiveRunSurrounding = nodecg.Replicant('runDataActiveRunSurrounding', speedcontrolBundle);
 
 	runDataActiveRun.on('change', newVal => {
 		if (newVal) updateSceneFields(newVal);
+	});
+
+	function updateUpNext(id) {
+		const nextRun = runDataArray.value.find(item => item.id === id);
+
+		if (nextRun) {
+			const runnerTeams = nextRun.teams.filter(team => (team.name || '').toLowerCase().indexOf('host') === -1);
+			const runners = runnerTeams.reduce((acc, team) => [
+				...acc, 
+				...team.players.map(player => player.name),
+			], []);
+
+			nextRunElem.innerHTML = `${nextRun.game} ${nextRun.category} by ${runners.join(', ')}`;
+		} else {
+			nextRunElem.innerHTML = 'Finale!';
+		}
+	}
+
+	NodeCG.waitForReplicants(runDataArray, runDataActiveRunSurrounding).then(() => {
+		if (runDataActiveRunSurrounding.value) updateUpNext(runDataActiveRunSurrounding.value.next);
+	});
+	
+	runDataActiveRunSurrounding.on('change', newVal => {
+		if (newVal) updateUpNext(newVal.next)
 	});
 
 	function updateElementSetHTML(elements, value) {
