@@ -12,6 +12,8 @@
 	const hostInfo = document.querySelectorAll('.host-info');
 	const commentaryInfo = document.querySelectorAll('.commentary-info');
 	const nextRunElem = document.querySelector('.up-next-text');
+	const irlRunMarkerElems = [...document.querySelectorAll('.info-flair-irl')];
+	const onlineRunMarkerElems = [...document.querySelectorAll('.info-flair-online')];
 	
 	// This is where the information is received for the run we want to display.
 	// The "change" event is triggered when the current run is changed.
@@ -73,6 +75,32 @@
 		}
 	}
 	
+	function setCommentatorData(className, commentatorName, commentatorPronouns) {
+		const parentElem = document.querySelector(className);
+
+		if (!parentElem) return;
+
+		parentElem.classList.remove('hidden');
+
+		if (!commentatorName) {
+			parentElem.classList.add('hidden');
+
+			return;
+		}
+
+		parentElem.querySelector('.name').textContent = commentatorName;
+
+		const pronounsBlock = parentElem.querySelector('.commentator-block-pronouns');
+
+		pronounsBlock.classList.remove('hidden');
+
+		if (commentatorPronouns) {
+			pronounsBlock.querySelector('.pronouns').textContent = commentatorPronouns.toLowerCase();
+		} else {
+			pronounsBlock.classList.add('hidden');
+		}
+	}
+	
 	// Sets information on the pages for the run.
 	function updateSceneFields(runData) {
 		updateElementSetHTML(gameTitle, runData.game);
@@ -93,38 +121,27 @@
 		if (runnerTeams.length > 1) {
 			runner1InfoBlock.classList.remove('solo');
 			runner1InfoBlock.classList.remove('hidden');
+			document.body.classList.remove('solo');
 
 			setRunnerInfo(runner2InfoBlock, runnerTeams[1].players[0]);
 		} else {
 			runner1InfoBlock.classList.add('solo');
 			runner2InfoBlock.classList.add('hidden');
+			document.body.classList.add('solo');
+		}
+		
+		irlRunMarkerElems.forEach(elem => elem.classList.remove('enabled'));
+		onlineRunMarkerElems.forEach(elem => elem.classList.remove('enabled'));
+
+		if (runData.customData.runLocation?.toLowerCase() === 'online') {
+			onlineRunMarkerElems.forEach(elem => elem.classList.add('enabled'));
+		} else if (runData.customData.runLocation?.toLowerCase() === 'offline') {
+			irlRunMarkerElems.forEach(elem => elem.classList.add('enabled'));
 		}
 
-		if (hostInfo) {
-			const hostTeam = runData.teams.find(team => (team.name || '').toLowerCase().indexOf('host') !== -1);
-
-			console.log('host', hostTeam);
-			if (hostTeam) {
-				setRunnerInfo(hostInfo, hostTeam.players[0])
-			}
-		}
-
-		if (commentaryInfo) {
-			const commentaryTeam = runData.teams.find(team => {
-				const name = team.name?.toLowerCase();
-				
-				return name?.indexOf('commentators') !== -1 || name?.indexOf('commentary') !== -1;
-			});
-
-			if (commentaryTeam) {
-				const runnerText = commentaryTeam.players.map(player => {
-					if (player.pronouns) return `${player.name} (${player.pronouns})`;
-
-					return player.name
-				});
-
-				commentaryInfo.innerHTML = runnerText.join(', ');
-			}
-		}
+		setCommentatorData('.commentator-1', runData.customData.commentator1Name, runData.customData.commentator1Pronouns);
+		setCommentatorData('.commentator-2', runData.customData.commentator2Name, runData.customData.commentator2Pronouns);
+		setCommentatorData('.commentator-3', runData.customData.commentator3Name, runData.customData.commentator3Pronouns);
+		setCommentatorData('.commentator-4', runData.customData.commentator4Name, runData.customData.commentator4Pronouns);
 	}
 })();
