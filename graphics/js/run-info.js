@@ -35,7 +35,7 @@
 				...team.players.map(player => player.name),
 			], []);
 
-			nextRunElem.innerHTML = `${nextRun.game} ${nextRun.category} by ${runners.join(', ')}`;
+			nextRunElem.innerHTML = `${nextRun.game.replace('é', 'e')} ${nextRun.category} by ${runners.join(', ')}`;
 		} else {
 			nextRunElem.innerHTML = 'Finale!';
 		}
@@ -43,6 +43,8 @@
 
 	NodeCG.waitForReplicants(runDataArray, runDataActiveRunSurrounding).then(() => {
 		if (runDataActiveRunSurrounding.value) updateUpNext(runDataActiveRunSurrounding.value.next);
+
+		document.body.classList.add('run-info-loaded');
 	});
 	
 	runDataActiveRunSurrounding.on('change', newVal => {

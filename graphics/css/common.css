@@ -46,6 +46,15 @@ html, body {
 	box-sizing: border-box;
 }
 
+body {
+	display: none;
+}
+
+body.run-info-loaded.timer-loaded.donation-total-loaded,
+body.always-show {
+	display: block;
+}
+
 .title {
 	background-color: #A64E42;
 	color: #fff;
@@ -202,7 +211,7 @@ body {
 .runner-runtime {
 	display: flex;
 	align-items: center;
-	font-size: 1rem;
+	font-size: 1.25rem;
 }
 
 .clock-icon {
@@ -337,11 +346,11 @@ body {
 }
 
 .donation-block .runner-name {
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 }
 
 .donate-cta {
-	font-size: 1rem;
+	font-size: 0.92rem;
 	font-family: "Truth and Ideals";
 }
 
@@ -408,6 +417,10 @@ body {
 
 .runner-block.no-game-info .runner-bar-bottom {
 	top: -0.9375rem;
+}
+
+#runner-left {
+	margin-top: auto;
 }
 
 .timer-block {
@@ -477,46 +490,191 @@ body {
 .commentator-list {
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 3rem;
+	padding-bottom: 2rem;
 	width: max-content;
 	align-items: flex-end;
 	margin-left: auto;
 }
 
-.commentator-block {
+.item-block {
 	position: relative;
-	left: 3rem;
+	display: flex;
+	flex-direction: row;
+	padding: 0.125rem 0.125rem 0.125rem 0.25rem;
+	overflow: visible;
+	font-size: 1.25em;
 }
 
-.commentator-block-inner {
+.item-block:after {
+	content: '';
 	position: absolute;
-	left: 0.125rem;
-	top: 0.125rem;
+	left: 0;
+	top: 0;
 	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #D4D2D5;
+	clip-path: polygon(
+		0 50%,
+		0.325rem 0,
+		calc(100% - 0.325rem) 0,
+		100% 50%,
+		100% 50%,
+		calc(100% - 0.325rem) 100%,
+		0.325rem 100%,
+		0% 50%
+  );
 }
 
-.commentator-block-inner:before {
+.item-block:before {
 	content: '';
 	position: absolute;
-	left: -0.5rem;
-	top: -0.325rem;
-	border-bottom: 1rem solid #313131;
-	border-left: 0.5rem solid transparent;
-	border-right: 0.5rem solid transparent;
-	height: 0;
-	width: calc(100% - 0.25rem);
+	top: -0.125rem;
+	left: -0.125rem;
+	width: calc(100% + 0.25rem);
+	height: calc(100% + 0.25rem);
+	z-index: -2;
+	background-color: #313131;
+	clip-path: polygon(
+		0 50%,
+		0.375rem 0,
+		calc(100% - 0.375rem) 0,
+		100% 50%,
+		100% 50%,
+		calc(100% - 0.375rem) 100%,
+		0.375rem 100%,
+		0% 50%
+  );
 }
 
-.commentator-block-inner:after {
+.item-block-left {
+	position: relative;
+	display: flex;
+	height: 100%;
+	padding: 0 0.175rem 0 0.25rem;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+}
+
+.item-block-left:after {
 	content: '';
 	position: absolute;
-	left: -0.5rem;
-	top: 0.675rem;
-	border-top: 1rem solid #313131;
-	border-left: 0.5rem solid transparent;
-	border-right: 0.5rem solid transparent;
-	height: 0;
+	left: 0;
+	top: 0.125rem;
+	width: calc(100% + 1rem);
+	height: calc(100% - 0.25rem);
+	z-index: -1;
+	background-color: #D4D2D5;
+	clip-path: polygon(
+		0 50%,
+		0.25rem 0,
+		calc(100% - 0.25rem) 0,
+		100% 50%,
+		100% 50%,
+		calc(100% - 0.25rem) 100%,
+		0.25rem 100%,
+		0% 50%
+  );
+}
+
+.item-block-left:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -0.125rem;
+	width: calc(100% + 1rem);
+	height: 100%;
+	z-index: -2;
+	background-color: #838383;
+	clip-path: polygon(
+		0 50%,
+		0.3rem 0,
+		calc(100% - 0.3rem) 0,
+		100% 50%,
+		100% 50%,
+		calc(100% - 0.3rem) 100%,
+		0.3rem 100%,
+		0% 50%
+  );
+}
+.commentator-mic-icon {
+	width: 1.125rem;
+	height: 1.125rem;
+	background-size: cover;
+	background-image: url("/bundles/psrd-2022-springtide-storm-layouts/graphics/images/microphone-mixed.png");
+	z-index: 2;
+}
+
+.item-block-main {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3;
+	overflow: visible;
+}
+
+.item-block-main:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: -0.125rem;
 	width: calc(100% - 0.25rem);
+	height: calc(100% + 0.25rem);
+	z-index: -1;
+	background-color: #D4D2D5;
+	clip-path: polygon(
+		0 50%,
+		0.25rem 0,
+		calc(50% + 0.125rem) 0,
+		calc(50% + 0.125rem) 100%,
+		0.25rem 100%,
+		0% 50%
+  );
+}
+
+.item-block-main:after {
+	content: '';
+	position: absolute;
+	top: -0.25rem;
+	left: -0.125rem;
+	width: 100%;
+	height: calc(100% + 0.5rem);
+	z-index: -2;
+	background-color: #313131;
+	clip-path: polygon(
+		0 50%,
+		0.3rem 0,
+		50% 0,
+		50% 100%,
+		0.3rem 100%,
+		0% 50%
+  );
+}
+
+.item-data {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: #313131;
+	padding: 0.125rem 0.5rem;
+	height: 100%;
+	margin-left: 0.125rem;
+	color: #fff;
+	z-index: 2;
+
+	clip-path: polygon(
+		0 50%,
+		0.25rem 0,
+		calc(100% - 0.25rem) 0,
+		100% 50%,
+		100% 50%,
+		calc(100% - 0.3rem) 100%,
+		0.25rem 100%,
+		0% 50%
+  );
 }
 
 .commentator-block-pronouns {
@@ -527,80 +685,20 @@ body {
 }
 
 .commentator-block-pronouns .runner-pronouns-label {
-	font-size: 0.875rem;
+	font-size: 0.75rem;
 }
 
-.commentator-block-segment {
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: baseline;
-	color: #fff;
-	font-size: 1.25rem;
-	z-index: 1;
-	padding: 0 4rem 0 1rem;
-	max-width: max-content;
-	min-width: max-content;
-}
-
-.commentator-block-segment:before {
-	content: '';
-	position: absolute;
-	left: -0.625rem;
-	top: -0.4375rem;
-	border-bottom: 1.25rem solid #D4D2D5;
-	border-left: 0.625rem solid transparent;
-	border-right: 0.625rem solid transparent;
-	height: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-.commentator-block-segment:after {
-	content: '';
-	position: absolute;
-	left: -0.625rem;
-	top: 0.81235rem;
-	border-top: 1.25rem solid #D4D2D5;
-	border-left: 0.625rem solid transparent;
-	border-right: 0.625rem solid transparent;
-	height: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-.commentator-block-segment .name {
-	z-index: 1;
-}
-
-.commentator-block-left {
-	max-width: 5rem;
-	left: -2.25rem;
-	z-index: -3;
-}
-
-.commentator-block-left .commentator-block-inner:before {
-	border-bottom-color: #D4D2D5;
-}
-
-
-.commentator-block-left .commentator-block-inner:after {
-	border-top-color: #D4D2D5;
-}
-
-.commentator-mic-icon {
-	position: absolute;
-	left: 0.125rem;
-	top: 0;
-	width: 1.5rem;
-	height: 1.5rem;
-	background-size: cover;
-	background-image: url("/bundles/psrd-2022-springtide-storm-layouts/graphics/images/microphone-mixed.png");
-}
-
-.commentator-block + .commentator-block {
+.item-block + .item-block {
 	margin-top: 1.5rem;
+}
+
+.commentator-list {
+	position: relative;
+	left: 4rem;
+}
+
+.commentator-block .item-data {
+	padding-right: 4rem;
 }
 
 .solo .donation-block {
@@ -611,3 +709,13 @@ body {
 .solo .container {
 	justify-content: flex-end;
 } 
+
+body:not(.solo) .commentator-list {
+	display: none;
+}
+
+body:not(.solo) .timer-block {
+	position: fixed;
+	right: 0;
+	top: 1rem;
+}

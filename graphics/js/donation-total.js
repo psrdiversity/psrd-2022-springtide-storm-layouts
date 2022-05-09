@@ -39,12 +39,16 @@
 
 	donationTarget.on('change', newVal => {
 		const value = newVal.toLocaleString('en-US', { minimumFractionDigits: 0 });
-
-		document.querySelector('#donation-goal').innerHTML = `$${value}`;
+		const donationGoalElem = document.querySelector('#donation-goal');
+		
+		if (!donationGoalElem) return;
+		
+		donationGoalElem.innerHTML = `$${value}`;
 		document.querySelector('#donation-goal-shading').innerHTML = `$${value}`;
 	});
 
 	function updateProgressBar(value) {
+		if (!progressBarFillElem) return;
 		const percentage = Math.min(value / donationTarget.value, 1);
 
 		progressBarFillElem.style.width = `${percentage * 100}%`;
@@ -61,6 +65,8 @@
 	
 	NodeCG.waitForReplicants(donationTotal, donationTarget).then(() => {
 		updateProgressBar(donationTotal.value);
+
+		document.body.classList.add('donation-total-loaded');
 	});
 	
 	function animateTotal(value) {

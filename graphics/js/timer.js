@@ -22,4 +22,6 @@
 
 		timerElem.innerHTML = newVal.time;
 	}
+
+	document.body.classList.add('timer-loaded');
 })();
