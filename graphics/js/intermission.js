@@ -45,6 +45,29 @@
         const normalizedGameName = upcomingRun.game.length > 24 ? upcomingRun.game.replace(/Pok[eé]mon/, '').trim() : upcomingRun.game;
 
         runElem.querySelector('.upcoming-run-name').textContent = normalizedGameName;
+                
+        if (i === 1) {
+          [...document.body.querySelectorAll('.bag-console')].forEach(element => {
+            element.classList.remove('console-active');
+          });
+
+          const normalizedConsoleName = upcomingRun.system?.toLowerCase() ?? '';
+          // Set active console.
+          console.log(normalizedConsoleName);
+          if (normalizedConsoleName === '3ds') {
+            document.body.querySelector('.console-3ds').classList.add('console-active');
+          } else if (normalizedConsoleName === 'ds') {
+            document.body.querySelector('.console-ds').classList.add('console-active');
+          } else if (normalizedConsoleName === 'gba' || normalizedConsoleName === 'gameboy advance') {
+            document.body.querySelector('.console-gba').classList.add('console-active');
+          } else if (normalizedConsoleName === 'gbc' || normalizedConsoleName === 'gameboy color') {
+            document.body.querySelector('.console-gbc').classList.add('console-active');
+          } else if (normalizedConsoleName === 'switch') {
+            document.body.querySelector('.console-switch').classList.add('console-active');
+          } else if (normalizedConsoleName === 'gcn' || normalizedConsoleName === 'gamecube') {
+            document.body.querySelector('.console-gcn').classList.add('console-active');
+          }
+        }
 
         const runnerTeams = upcomingRun.teams.filter(team => {
           const name = team.name?.toLowerCase() ?? '';

@@ -188,3 +188,76 @@
 .ignored-for-layout {
   display: none;
 }
+
+.bag-column {
+  position: relative;
+}
+
+.bag-console {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  background-size: cover;
+  margin-top: 2rem;
+}
+
+.console-switch {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-switch-faded.png');
+  z-index: 1;
+  transform: translate(0, 33%);
+}
+
+.console-switch.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-switch.png');
+}
+
+.console-3ds {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-3ds-faded.png');
+  transform: translate(75%, -16%);
+  z-index: -2;
+}
+
+.console-3ds.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-3ds.png');
+}
+
+.console-ds {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-ds-faded.png');
+  transform: translate(75%, 75%);
+  z-index: 3;
+}
+
+
+.console-ds.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-ds.png');
+}
+
+.console-gba {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gba-faded.png');
+  transform: translate(0, 75%);
+  z-index: 2;
+}
+
+.console-gba.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gba.png');
+}
+
+.console-gbc {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gbc-faded.png');
+  transform: translate(108%, 33%);
+  z-index: 2;
+}
+
+.console-gbc.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gbc.png');
+}
+
+.console-gcn {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gcn-faded.png');
+  transform: translate(0, -8%);
+  z-index: -1;
+}
+
+.console-gcn.console-active {
+  background-image: url('/bundles/psrd-2022-springtide-storm-layouts/graphics/images/console-gcn.png');
+}
